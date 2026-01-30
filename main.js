@@ -1,4 +1,4 @@
-﻿import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
 
@@ -36,13 +36,11 @@ const fillLight = new THREE.DirectionalLight(0xffd7bf, 0.6);
 fillLight.position.set(-4, 2, -2);
 scene.add(fillLight);
 
-let modelRoot = null;
-
 const loader = new GLTFLoader();
 loader.load(
   "./model.glb",
   (gltf) => {
-    modelRoot = gltf.scene;
+    const modelRoot = gltf.scene;
     scene.add(modelRoot);
 
     const box = new THREE.Box3().setFromObject(modelRoot);
