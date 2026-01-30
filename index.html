@@ -1,0 +1,44 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3D Room Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=Fraunces:opsz,wght@9..144,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-texture" aria-hidden="true"></div>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Interactive 3D</p>
+          <h1>Room Model Viewer</h1>
+          <p class="subhead">
+            Drag to rotate. Scroll or pinch to zoom. Double-click to focus.
+          </p>
+        </div>
+        <div class="pill">
+          <span class="dot"></span>
+          <span id="status">Loading model...</span>
+        </div>
+      </header>
+
+      <section class="stage">
+        <div id="viewer" class="viewer" aria-label="3D model viewer"></div>
+        <div class="hint">Drag • Scroll • Double-click</div>
+      </section>
+
+      <footer class="footer">
+        <span>Replace <strong>web/model.glb</strong> with your exported file.</span>
+      </footer>
+    </main>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
