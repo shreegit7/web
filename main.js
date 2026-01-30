@@ -2,6 +2,8 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/DRACOLoader.js";
+import { KTX2Loader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/KTX2Loader.js";
+import { MeshoptDecoder } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/meshopt_decoder.module.js";
 
 const container = document.getElementById("viewer");
 const statusEl = document.getElementById("status");
@@ -41,6 +43,13 @@ const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
 loader.setDRACOLoader(dracoLoader);
+const ktx2Loader = new KTX2Loader();
+ktx2Loader.setTranscoderPath(
+  "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/basis/"
+);
+ktx2Loader.detectSupport(renderer);
+loader.setKTX2Loader(ktx2Loader);
+loader.setMeshoptDecoder(MeshoptDecoder);
 loader.load(
   "./model.glb",
   (gltf) => {
@@ -69,7 +78,8 @@ loader.load(
     }
   },
   (error) => {
-    statusEl.textContent = "Could not load model.glb";
+    const message = error && error.message ? ` (${error.message})` : "";
+    statusEl.textContent = `Could not load model.glb${message}`;
     // eslint-disable-next-line no-console
     console.error("Model load error", error);
   }
